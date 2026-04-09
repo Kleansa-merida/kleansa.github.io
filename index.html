@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kleansa – Productos de Limpieza</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --verde: #0a4a3a;
+  --verde-medio: #1a7a5e;
+  --verde-claro: #25b389;
+  --acento: #d4f5e9;
+  --blanco: #f8fdf8;
+  --gris: #e8f2ee;
+  --texto: #0d2b22;
+  --texto-suave: #4a7a68;
+  --whatsapp: #25d366;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--blanco);color:var(--texto);scroll-behavior:smooth}
+
+/* ── HEADER ─────────────────────────────── */
+header{
+  background:var(--verde);
+  position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 20px rgba(0,0,0,.25);
+}
+.header-inner{
+  max-width:1100px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 1.5rem;height:64px;
+}
+.logo{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2rem;letter-spacing:3px;
+  color:#fff;text-decoration:none;
+  display:flex;align-items:center;gap:10px;
+}
+.logo-icon{
+  width:36px;height:36px;
+  background:var(--verde-claro);
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;
+}
+nav{display:flex;gap:6px;flex-wrap:wrap}
+nav a{
+  color:rgba(255,255,255,.75);
+  text-decoration:none;
+  font-size:13px;font-weight:500;
+  padding:6px 12px;border-radius:20px;
+  transition:all .2s;letter-spacing:.5px;
+}
+nav a:hover,nav a.active{
+  background:var(--verde-claro);color:#fff;
+}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:24px;height:2px;background:#fff;margin:5px 0;transition:.3s}
+
+/* ── HERO ────────────────────────────────── */
+.hero{
+  background:linear-gradient(135deg,var(--verde) 0%,var(--verde-medio) 60%,var(--verde-claro) 100%);
+  padding:5rem 1.5rem 4rem;
+  text-align:center;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero h1{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.8rem,8vw,5.5rem);
+  letter-spacing:6px;color:#fff;
+  position:relative;line-height:1;
+}
+.hero p{
+  font-size:1.05rem;color:rgba(255,255,255,.8);
+  margin-top:1rem;font-weight:300;
+  letter-spacing:.5px;position:relative;
+}
+.hero-badges{
+  display:flex;gap:10px;justify-content:center;
+  flex-wrap:wrap;margin-top:1.8rem;position:relative;
+}
+.badge{
+  background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.3);
+  color:#fff;font-size:12px;font-weight:500;
+  padding:6px 16px;border-radius:20px;
+  letter-spacing:.5px;
+}
+
+/* ── SECCIÓN CATEGORÍAS NAV ─────────────── */
+.cat-nav{
+  background:#fff;
+  border-bottom:1px solid var(--gris);
+  position:sticky;top:64px;z-index:90;
+  overflow-x:auto;
+}
+.cat-nav-inner{
+  display:flex;gap:0;
+  max-width:1100px;margin:0 auto;
+  padding:0 1rem;
+}
+.cat-nav-inner a{
+  text-decoration:none;color:var(--texto-suave);
+  font-size:13px;font-weight:500;
+  padding:14px 20px;
+  border-bottom:3px solid transparent;
+  white-space:nowrap;transition:all .2s;
+  letter-spacing:.3px;
+}
+.cat-nav-inner a:hover{color:var(--verde-claro);border-color:var(--verde-claro)}
+
+/* ── SECCIÓN ─────────────────────────────── */
+.section{padding:3rem 1.5rem;max-width:1100px;margin:0 auto}
+.section-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2.2rem;letter-spacing:4px;
+  color:var(--verde);
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:.4rem;
+}
+.section-title::after{
+  content:'';flex:1;height:2px;
+  background:linear-gradient(to right,var(--verde-claro),transparent);
+  border-radius:2px;
+}
+.section-sub{
+  font-size:13px;color:var(--texto-suave);
+  margin-bottom:2rem;font-weight:300;
+}
+
+/* ── GRID PRODUCTOS ──────────────────────── */
+.products-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:16px;
+}
+
+/* ── CARD PRODUCTO ───────────────────────── */
+.product-card{
+  background:#fff;
+  border:1px solid var(--gris);
+  border-radius:16px;
+  overflow:hidden;
+  transition:transform .2s,box-shadow .2s;
+}
+.product-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 32px rgba(10,74,58,.12);
+}
+.card-img{
+  height:160px;
+  background:var(--gris);
+  display:flex;align-items:center;justify-content:center;
+  font-size:54px;
+  position:relative;overflow:hidden;
+}
+.card-img img{
+  width:100%;height:100%;object-fit:cover;
+}
+.card-body{padding:14px}
+.card-name{
+  font-size:14px;font-weight:500;
+  color:var(--texto);margin-bottom:6px;
+  line-height:1.3;
+}
+.card-desc{
+  font-size:12px;color:var(--texto-suave);
+  margin-bottom:10px;line-height:1.4;font-weight:300;
+}
+.card-select{
+  width:100%;padding:7px 10px;
+  border:1px solid var(--gris);border-radius:8px;
+  font-family:'DM Sans',sans-serif;
+  font-size:12px;color:var(--texto);
+  background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%234a7a68'/%3E%3C/svg%3E") no-repeat right 10px center;
+  appearance:none;-webkit-appearance:none;
+  cursor:pointer;margin-bottom:8px;
+}
+.card-select:focus{outline:none;border-color:var(--verde-claro)}
+.card-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:10px;border-top:1px solid var(--gris);
+  margin-top:4px;
+}
+.card-price{
+  font-size:16px;font-weight:500;color:var(--verde);
+}
+.btn-cotizar{
+  background:var(--verde-claro);color:#fff;
+  border:none;border-radius:8px;
+  font-size:11px;font-weight:500;
+  padding:7px 12px;cursor:pointer;
+  font-family:'DM Sans',sans-serif;
+  transition:background .2s;letter-spacing:.3px;
+  text-decoration:none;display:inline-block;
+}
+.btn-cotizar:hover{background:var(--verde-medio)}
+
+/* ── DIVISOR ─────────────────────────────── */
+.section-divider{
+  height:1px;background:var(--gris);
+  max-width:1100px;margin:0 auto;
+}
+
+/* ── WHATSAPP FLOAT ──────────────────────── */
+.wa-float{
+  position:fixed;bottom:24px;right:24px;z-index:200;
+  background:var(--whatsapp);color:#fff;
+  border-radius:50px;
+  display:flex;align-items:center;gap:10px;
+  padding:12px 20px;text-decoration:none;
+  font-size:14px;font-weight:500;
+  box-shadow:0 4px 20px rgba(37,211,102,.4);
+  transition:transform .2s,box-shadow .2s;
+  font-family:'DM Sans',sans-serif;
+}
+.wa-float:hover{transform:scale(1.05);box-shadow:0 6px 28px rgba(37,211,102,.55)}
+.wa-float svg{flex-shrink:0}
+
+/* ── FOOTER ──────────────────────────────── */
+footer{
+  background:var(--verde);color:rgba(255,255,255,.7);
+  text-align:center;padding:2rem 1rem;
+  font-size:13px;margin-top:4rem;
+}
+footer strong{color:#fff}
+
+/* ── MOBILE ──────────────────────────────── */
+@media(max-width:640px){
+  nav{display:none;flex-direction:column;
+    position:absolute;top:64px;left:0;right:0;
+    background:var(--verde);padding:1rem;gap:4px;
+  }
+  nav.open{display:flex}
+  nav a{border-radius:8px;padding:10px 14px}
+  .hamburger{display:block}
+  .products-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+  .wa-float span{display:none}
+  .wa-float{padding:14px}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="#inicio" class="logo">
+      <div class="logo-icon">✦</div>
+      KLEANSA
+    </a>
+    <nav id="nav">
+      <a href="#cocina">Cocina</a>
+      <a href="#carwash">Car Wash</a>
+      <a href="#desinfectantes">Desinfectantes</a>
+      <a href="#lavanderia">Lavandería</a>
+      <a href="https://wa.me/529994142815" target="_blank" style="background:var(--verde-claro);color:#fff">Cotizar</a>
+    </nav>
+    <button class="hamburger" onclick="toggleNav()" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <h1>Productos de<br>Limpieza</h1>
+  <p>Soluciones profesionales para hogar, negocio y más · Mérida, Yucatán</p>
+  <div class="hero-badges">
+    <span class="badge">🏠 Hogar</span>
+    <span class="badge">🚗 Car Wash</span>
+    <span class="badge">🧴 Desinfectantes</span>
+    <span class="badge">👕 Lavandería</span>
+    <span class="badge">📦 Mayoreo y Menudeo</span>
+  </div>
+</section>
+
+<!-- CATEGORÍAS NAV -->
+<div class="cat-nav">
+  <div class="cat-nav-inner">
+    <a href="#cocina">🍳 Cocina</a>
+    <a href="#carwash">🚗 Car Wash</a>
+    <a href="#desinfectantes">🦠 Desinfectantes</a>
+    <a href="#lavanderia">👕 Lavandería</a>
+  </div>
+</div>
+
+
+<!-- ══════════════ COCINA ══════════════ -->
+<section class="section" id="cocina">
+  <h2 class="section-title">🍳 Cocina</h2>
+  <p class="section-sub">Limpieza profunda para superficies, utensilios y electrodomésticos</p>
+  <div class="products-grid">
+
+    <div class="product-card">
+      <div class="card-img">🧼</div>
+      <div class="card-body">
+        <div class="card-name">Jabón lavatrastes</div>
+        <div class="card-desc">Alta concentración. Corta grasa al instante. Aroma fresco.</div>
+        <select class="card-select">
+          <option>1 Litro</option>
+          <option>5 Litros</option>
+          <option>20 Litros</option>
+        </select>
+        <select class="card-select">
+          <option>Limón</option>
+          <option>Naranja</option>
+          <option>Manzana verde</option>
+        </select>
+        <div class="card-footer">
+          <span class="card-price">Consultar</span>
+          <a class="btn-cotizar" href="https://wa.me/529994142815?text=Hola%20Kleansa,%20quiero%20cotizar:%20Jabón%20lavatrastes" target="_blank">Cotizar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="card-img">🧽</div>
+      <div class="card-body">
+        <div class="card-name">Desengrasante cocina</div>
+        <div class="card-desc">Elimina grasa acumulada en estufas, campanas y superficies.</div>
+        <select class="card-select">
+          <option>1 Litro</option>
+          <option>5 Litros</option>
+          <option>20 Litros</option>
+        </select>
+        <div class="card-footer">
+          <span class="card-price">Consultar</span>
+          <a class="btn-cotizar" href="https://wa.me/529994142815?text=Hola%20Kleansa,%20quiero%20cotizar:%20Desengrasante%20cocina" target="_blank">Cotizar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="card-img">🫧</div>
+      <div class="card-body">
+        <div class="card-name">Multiusos cocina</div>
+        <div class="card-desc">Para encimeras, azulejos y electrodomésticos. Listo para usar.</div>
+        <select class="card-select">
+          <option>500 ml</option>
+          <option>1 Litro</option>
+          <option>5 Litros</option>
+        </select>
+        <div class="card-footer">
+          <span class="card-price">Consultar</span>
+          <a class="btn-cotizar" href="https://wa.me/529994142815?text=Hola%20Kleansa,%20quiero%20cotizar:%20Multiusos%20cocina" target="_blank">Cotizar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="card-img">💧</div>
+      <div class="card-body">
+        <div class="card-name">Limpiador de vidrios</div>
+        <div class="card-desc">Sin rayas. Ideal para ventanas, vitrinas y superficies de cristal.</div>
+        <select class="card-select">
+          <option>500 ml</option>
+          <option>1 Litro</option>
+          <option>5 Litros</option>
+        </select>
+        <div class="card-footer">
+          <span class="card-price">Consultar</span>
+          <a class="btn-cotizar" href="https://wa.me/529994142815?text=Hola%20Kleansa,%20quiero%20cotizar:%20Limpiador%20de%20vidrios" target="_blank">Cotizar</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<div class="section-divider"></div>
+
+
+<!-- ══════════════ CAR WASH ══════════════ -->
+<section class="section" id="carwash">
+  <h2 class="section-title">🚗 Car Wash</h2>
+  <p class="section-sub">Productos profesionales para lavado, brillo y protección de autos</p>
+  <div class="products-grid">
+
+    <div class="product-card">
+      <div class="card-img">🫧</div>
+      <div class="card-body">
+        <div class="card-name">Shampoo automotriz sin cera</div>
+        <div class="card-desc">Alta espuma, limpieza profunda sin dañar la pintura.</div>
+        <select class="card-select">
+          <option>1 Litro</option>
+          <option>5 Litros</option>
+          <option>20 Litros</option>
+        </select>
+        <div class="card-footer">
+          <span class="card-price">Consultar</span>
+          <a class="btn-cotizar" href="https://wa.me/529994142815?text=Hola%20Kleansa,%20quiero%20cotizar:%20Shampoo%20automotriz%20sin%20cera" target="_blank">Cotizar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="card-img">✨</div>
+      <div class="card-body">
+        <div class="card-name">Shampoo con cera</div>
+        <div class="card-desc">Limpia y protege en un solo paso. Deja brillo espejo.</div>
+        <select class="card-select">
+          <option>1 Litro</option>
+          <option>5 Litros</option>
+          <option>20 Litros</option>
+        </select>
+        <div class="card-footer">
+          <span class="card-price">Consultar</span>
+          <a class="btn-cotizar" href="https://wa.me/529994142815?text=Hola%20Kleansa,%20quiero%20cotizar:%20Shampoo%20con%20cera" target="_blank">Cotizar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="card-img">🛞</div>
+      <div class="card-body">
+        <div class="card-name">Lubrivinil (abrillantador)</div>
+        <div class="card-desc">Para llantas, plásticos y hules. Deja acabado oscuro y brillante.</div>
+        <select class="card-select">
+          <option>1 Litro</option>
+          <option>5 Litros</option>
+          <option>20 Litros</option>
+        </select>
+        <div class="card-footer">
+          <span class="card-price">Consultar</span>
+          <a class="btn-cotizar" href="https://wa.me/529994142815?text=Hola%20Kleansa,%20quiero%20cotizar:%20Lubrivinil" target="_blank">Cotizar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="card-img">🧴</div>
+      <div class="card-body">
+        <div class="card-name">Espuma activa</div>
+        <div class="card-desc">Pre-lavado de alta penetración. Elimina barro y suciedad difícil.</div>
+        <select class="card-select">
+          <option>1 Litro</option>
+          <option>5 Litros</option>
+          <option>20 Litros</option>
+        </select>
+        <div class="card-footer">
+          <span class="card-price">Consultar</span>
+          <a class="btn-cotizar" href="https://wa.me/529994142815?text=Hola%20Kleansa,%20quiero%20cotizar:%20Espuma%20activa" target="_blank">Cotizar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="card-img">🌟</div>
+      <div class="card-body">
+        <div class="card-name">Cera en crema</div>
+        <div class="card-desc">Protección y brillo profundo para carrocería. 250 gr.</div>
+        <div class="card-footer">
+          <span class="card-price">Consultar</span>
+          <a class="btn-cotizar" href="https://wa.me/529994142815?text=Hola%20Kleansa,%20quiero%20cotizar:%20Cera%20en%20crema" target="_blank">Cotizar</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<div class="section-divider"></div>
+
+
+<!-- ══════════════ DESINFECTANTES ══════════════ -->
+<section class="section" id="desinfectantes">
+  <h2 class="section-title">🦠 Desinfectantes</h2>
+  <p class="section-sub">Higiene y sanitización para hogar, negocio e industria</p>
+  <div class="products-grid">
+
+    <div class="product-card">
+      <div class="card-img">🧪</div>
+      <div class="card-body">
+        <div class="card-name">Cloro multiusos</div>
+        <div class="card-desc">Elimina bacterias y virus. Para pisos, baños y cocinas.</div>
+        <select class="card-select">
+          <option>1 Litro</option>
+          <option>5 Litros</option>
+          <option>20 Litros</option>
+        </select>
+        <div class="card-footer">
+          <span class="card-price">Consultar</span>
+          <a class="btn-cotizar" href="https://wa.me/529994142815?text=Hola%20Kleansa,%20quiero%20cotizar:%20Cloro%20multiusos" target="_blank">Cotizar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="card-img">🌿</div>
+      <div class="card-body">
+        <div class="card-name">Sanitizante</div>
+        <div class="card-desc">Elimina el 99.9% de gérmenes. Sin enjuague. Uso en superficies.</div>
+        <select class="card-select">
+          <option>500 ml</option>
+          <option>1 Litro</option>
+          <option>5 Litros</option>
+          <option>20 Litros</option>
+        </select>
+        <div class="card-footer">
+          <span class="card-price">Consultar</span>
+          <a class="btn-cotizar" href="https://wa.me/529994142815?text=Hola%20Kleansa,%20quiero%20cotizar:%20Sanitizante" target="_blank">Cotizar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="card-img">💆</div>
+      <div class="card-body">
+        <div class="card-name">Gel antibacterial</div>
+        <div class="card-desc">De secado rápido. Fórmula con aloe vera. Uso personal y comercial.</div>
+        <select class="card-select">
+          <option>500 ml</option>
+          <option>1 Litro</option>
+          <option>5 Litros</option>
+        </select>
+        <div class="card-footer">
+          <span class="card-price">Consultar</span>
+          <a class="btn-cotizar" href="https://wa.me/529994142815?text=Hola%20Kleansa,%20quiero%20cotizar:%20Gel%20antibacterial" target="_blank">Cotizar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="card-img">🏠</div>
+      <div class="card-body">
+        <div class="card-name">Desinfectante de pisos</div>
+        <div class="card-desc">Limpia y desinfecta en un solo paso. Con fragancia duradera.</div>
+        <select class="card-select">
+          <option>1 Litro</option>
+          <option>5 Litros</option>
+          <option>20 Litros</option>
+        </select>
+        <select class="card-select">
+          <option>Pino</option>
+          <option>Lavanda</option>
+          <option>Cítrico</option>
+          <option>Menta</option>
+        </select>
+        <div class="card-footer">
+          <span class="card-price">Consultar</span>
+          <a class="btn-cotizar" href="https://wa.me/529994142815?text=Hola%20Kleansa,%20quiero%20cotizar:%20Desinfectante%20de%20pisos" target="_blank">Cotizar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="card-img">🚽</div>
+      <div class="card-body">
+        <div class="card-name">Limpiador de baño</div>
+        <div class="card-desc">Elimina sarro y depósitos minerales. Acción rápida.</div>
+        <select class="card-select">
+          <option>1 Litro</option>
+          <option>5 Litros</option>
+          <option>20 Litros</option>
+        </select>
+        <div class="card-footer">
+          <span class="card-price">Consultar</span>
+          <a class="btn-cotizar" href="https://wa.me/529994142815?text=Hola%20Kleansa,%20quiero%20cotizar:%20Limpiador%20de%20baño" target="_blank">Cotizar</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<div class="section-divider"></div>
+
+
+<!-- ══════════════ LAVANDERÍA ══════════════ -->
+<section class="section" id="lavanderia">
+  <h2 class="section-title">👕 Lavandería</h2>
+  <p class="section-sub">Productos para ropa suave, limpia y con fragancia duradera</p>
+  <div class="products-grid">
+
+    <div class="product-card">
+      <div class="card-img">🌸</div>
+      <div class="card-body">
+        <div class="card-name">Suavizante de ropa</div>
+        <div class="card-desc">Fragancia duradera, deja la ropa suave y fácil de planchar.</div>
+        <select class="card-select">
+          <option>1 Litro</option>
+          <option>5 Litros</option>
+          <option>20 Litros</option>
+        </select>
+        <select class="card-select">
+          <option>Carisma</option>
+          <option>Sensación</option>
+          <option>Ensueño</option>
+          <option>Vainilla</option>
+        </select>
+        <div class="card-footer">
+          <span class="card-price">Consultar</span>
+          <a class="btn-cotizar" href="https://wa.me/529994142815?text=Hola%20Kleansa,%20quiero%20cotizar:%20Suavizante%20de%20ropa" target="_blank">Cotizar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="card-img">🧺</div>
+      <div class="card-body">
+        <div class="card-name">Detergente líquido</div>
+        <div class="card-desc">Alta concentración. Elimina manchas difíciles. Para todas las telas.</div>
+        <select class="card-select">
+          <option>1 Litro</option>
+          <option>5 Litros</option>
+          <option>20 Litros</option>
+        </select>
+        <select class="card-select">
+          <option>Clásico</option>
+          <option>+Color</option>
+          <option>Bebé</option>
+        </select>
+        <div class="card-footer">
+          <span class="card-price">Consultar</span>
+          <a class="btn-cotizar" href="https://wa.me/529994142815?text=Hola%20Kleansa,%20quiero%20cotizar:%20Detergente%20líquido" target="_blank">Cotizar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="card-img">⚪</div>
+      <div class="card-body">
+        <div class="card-name">Detergente en polvo</div>
+        <div class="card-desc">Para lavado a mano y máquina. Bolsa de 500 gr.</div>
+        <div class="card-footer">
+          <span class="card-price">Consultar</span>
+          <a class="btn-cotizar" href="https://wa.me/529994142815?text=Hola%20Kleansa,%20quiero%20cotizar:%20Detergente%20en%20polvo" target="_blank">Cotizar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="card-img">💛</div>
+      <div class="card-body">
+        <div class="card-name">Blanqueador</div>
+        <div class="card-desc">Blanquea y desinfecta ropa blanca sin dañar la tela.</div>
+        <select class="card-select">
+          <option>1 Litro</option>
+          <option>5 Litros</option>
+          <option>20 Litros</option>
+        </select>
+        <div class="card-footer">
+          <span class="card-price">Consultar</span>
+          <a class="btn-cotizar" href="https://wa.me/529994142815?text=Hola%20Kleansa,%20quiero%20cotizar:%20Blanqueador" target="_blank">Cotizar</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- WHATSAPP FLOTANTE -->
+<a class="wa-float" href="https://wa.me/529994142815?text=Hola%20Kleansa,%20me%20gustaría%20cotizar%20productos" target="_blank">
+  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <span>¡Contáctanos!</span>
+</a>
+
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>KLEANSA</strong> – Productos de Limpieza Profesional</p>
+  <p style="margin-top:6px">Mérida, Yucatán · Tel: <a href="tel:9994142815" style="color:var(--verde-claro)">999 414 2815</a></p>
+  <p style="margin-top:10px;font-size:11px">© 2026 Kleansa · Todos los derechos reservados</p>
+</footer>
+
+<script>
+function toggleNav(){
+  document.getElementById('nav').classList.toggle('open');
+}
+// Cerrar menú al hacer click en un enlace (mobile)
+document.querySelectorAll('#nav a').forEach(a=>{
+  a.addEventListener('click',()=>{
+    document.getElementById('nav').classList.remove('open');
+  });
+});
+</script>
+</body>
+</html>
